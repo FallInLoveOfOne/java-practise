@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hensu.javapractise.dao.MarkersiteMapper">
+  <resultMap id="BaseResultMap" type="com.hensu.javapractise.model.Markersite">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="city_no" jdbcType="VARCHAR" property="cityNo" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_name" jdbcType="VARCHAR" property="createName" />
+    <result column="data_source" jdbcType="VARCHAR" property="dataSource" />
+    <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
+    <result column="delete_name" jdbcType="VARCHAR" property="deleteName" />
+    <result column="district_name" jdbcType="VARCHAR" property="districtName" />
+    <result column="district_no" jdbcType="VARCHAR" property="districtNo" />
+    <result column="error_mes" jdbcType="VARCHAR" property="errorMes" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="in_date" jdbcType="TIMESTAMP" property="inDate" />
+    <result column="is_deleted" jdbcType="CHAR" property="isDeleted" />
+    <result column="operator_type" jdbcType="VARCHAR" property="operatorType" />
+    <result column="province_no" jdbcType="VARCHAR" property="provinceNo" />
+    <result column="time_stamp" jdbcType="VARCHAR" property="timeStamp" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="update_name" jdbcType="VARCHAR" property="updateName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="approval_date" jdbcType="VARCHAR" property="approvalDate" />
+    <result column="approval_name" jdbcType="VARCHAR" property="approvalName" />
+    <result column="approval_no" jdbcType="VARCHAR" property="approvalNo" />
+    <result column="approval_user_name" jdbcType="VARCHAR" property="approvalUserName" />
+    <result column="employee_no" jdbcType="VARCHAR" property="employeeNo" />
+    <result column="is_back" jdbcType="VARCHAR" property="isBack" />
+    <result column="manager_identity_num" jdbcType="VARCHAR" property="managerIdentityNum" />
+    <result column="manager_identity_type" jdbcType="VARCHAR" property="managerIdentityType" />
+    <result column="manager_phone" jdbcType="VARCHAR" property="managerPhone" />
+    <result column="manager_user_name" jdbcType="VARCHAR" property="managerUserName" />
+    <result column="marker_id" jdbcType="BIGINT" property="markerId" />
+    <result column="marker_name" jdbcType="VARCHAR" property="markerName" />
+    <result column="marker_no" jdbcType="VARCHAR" property="markerNo" />
+    <result column="marker_site_no" jdbcType="VARCHAR" property="markerSiteNo" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hensu.javapractise.model.Markersite">
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, city_no, create_date, create_name, data_source, delete_date, delete_name, district_name, 
+    district_no, error_mes, flag, in_date, is_deleted, operator_type, province_no, time_stamp, 
+    update_date, update_name, address, approval_date, approval_name, approval_no, approval_user_name, 
+    employee_no, is_back, manager_identity_num, manager_identity_type, manager_phone, 
+    manager_user_name, marker_id, marker_name, marker_no, marker_site_no, mobile, name, 
+    status, uuid, zip_code
+  </sql>
+  <sql id="Blob_Column_List">
+    remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.hensu.javapractise.model.MarkersiteExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from lv_marker_site
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.hensu.javapractise.model.MarkersiteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lv_marker_site
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from lv_marker_site
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lv_marker_site
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hensu.javapractise.model.MarkersiteExample">
+    delete from lv_marker_site
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hensu.javapractise.model.Markersite">
+    insert into lv_marker_site (id, city_no, create_date, 
+      create_name, data_source, delete_date, 
+      delete_name, district_name, district_no, 
+      error_mes, flag, in_date, 
+      is_deleted, operator_type, province_no, 
+      time_stamp, update_date, update_name, 
+      address, approval_date, approval_name, 
+      approval_no, approval_user_name, employee_no, 
+      is_back, manager_identity_num, manager_identity_type, 
+      manager_phone, manager_user_name, marker_id, 
+      marker_name, marker_no, marker_site_no, 
+      mobile, name, status, 
+      uuid, zip_code, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{cityNo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createName,jdbcType=VARCHAR}, #{dataSource,jdbcType=VARCHAR}, #{deleteDate,jdbcType=TIMESTAMP}, 
+      #{deleteName,jdbcType=VARCHAR}, #{districtName,jdbcType=VARCHAR}, #{districtNo,jdbcType=VARCHAR}, 
+      #{errorMes,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}, #{inDate,jdbcType=TIMESTAMP}, 
+      #{isDeleted,jdbcType=CHAR}, #{operatorType,jdbcType=VARCHAR}, #{provinceNo,jdbcType=VARCHAR}, 
+      #{timeStamp,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{approvalDate,jdbcType=VARCHAR}, #{approvalName,jdbcType=VARCHAR}, 
+      #{approvalNo,jdbcType=VARCHAR}, #{approvalUserName,jdbcType=VARCHAR}, #{employeeNo,jdbcType=VARCHAR}, 
+      #{isBack,jdbcType=VARCHAR}, #{managerIdentityNum,jdbcType=VARCHAR}, #{managerIdentityType,jdbcType=VARCHAR}, 
+      #{managerPhone,jdbcType=VARCHAR}, #{managerUserName,jdbcType=VARCHAR}, #{markerId,jdbcType=BIGINT}, 
+      #{markerName,jdbcType=VARCHAR}, #{markerNo,jdbcType=VARCHAR}, #{markerSiteNo,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{uuid,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hensu.javapractise.model.Markersite">
+    insert into lv_marker_site
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cityNo != null">
+        city_no,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="createName != null">
+        create_name,
+      </if>
+      <if test="dataSource != null">
+        data_source,
+      </if>
+      <if test="deleteDate != null">
+        delete_date,
+      </if>
+      <if test="deleteName != null">
+        delete_name,
+      </if>
+      <if test="districtName != null">
+        district_name,
+      </if>
+      <if test="districtNo != null">
+        district_no,
+      </if>
+      <if test="errorMes != null">
+        error_mes,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="inDate != null">
+        in_date,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="operatorType != null">
+        operator_type,
+      </if>
+      <if test="provinceNo != null">
+        province_no,
+      </if>
+      <if test="timeStamp != null">
+        time_stamp,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="updateName != null">
+        update_name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="approvalDate != null">
+        approval_date,
+      </if>
+      <if test="approvalName != null">
+        approval_name,
+      </if>
+      <if test="approvalNo != null">
+        approval_no,
+      </if>
+      <if test="approvalUserName != null">
+        approval_user_name,
+      </if>
+      <if test="employeeNo != null">
+        employee_no,
+      </if>
+      <if test="isBack != null">
+        is_back,
+      </if>
+      <if test="managerIdentityNum != null">
+        manager_identity_num,
+      </if>
+      <if test="managerIdentityType != null">
+        manager_identity_type,
+      </if>
+      <if test="managerPhone != null">
+        manager_phone,
+      </if>
+      <if test="managerUserName != null">
+        manager_user_name,
+      </if>
+      <if test="markerId != null">
+        marker_id,
+      </if>
+      <if test="markerName != null">
+        marker_name,
+      </if>
+      <if test="markerNo != null">
+        marker_no,
+      </if>
+      <if test="markerSiteNo != null">
+        marker_site_no,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="zipCode != null">
+        zip_code,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cityNo != null">
+        #{cityNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createName != null">
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSource != null">
+        #{dataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteDate != null">
+        #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteName != null">
+        #{deleteName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null">
+        #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtNo != null">
+        #{districtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMes != null">
+        #{errorMes,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="inDate != null">
+        #{inDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="operatorType != null">
+        #{operatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceNo != null">
+        #{provinceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStamp != null">
+        #{timeStamp,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null">
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDate != null">
+        #{approvalDate,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalName != null">
+        #{approvalName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalNo != null">
+        #{approvalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalUserName != null">
+        #{approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNo != null">
+        #{employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isBack != null">
+        #{isBack,jdbcType=VARCHAR},
+      </if>
+      <if test="managerIdentityNum != null">
+        #{managerIdentityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="managerIdentityType != null">
+        #{managerIdentityType,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPhone != null">
+        #{managerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="managerUserName != null">
+        #{managerUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="markerId != null">
+        #{markerId,jdbcType=BIGINT},
+      </if>
+      <if test="markerName != null">
+        #{markerName,jdbcType=VARCHAR},
+      </if>
+      <if test="markerNo != null">
+        #{markerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="markerSiteNo != null">
+        #{markerSiteNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hensu.javapractise.model.MarkersiteExample" resultType="java.lang.Long">
+    select count(*) from lv_marker_site
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update lv_marker_site
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cityNo != null">
+        city_no = #{record.cityNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createName != null">
+        create_name = #{record.createName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataSource != null">
+        data_source = #{record.dataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteDate != null">
+        delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteName != null">
+        delete_name = #{record.deleteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtName != null">
+        district_name = #{record.districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtNo != null">
+        district_no = #{record.districtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorMes != null">
+        error_mes = #{record.errorMes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null">
+        flag = #{record.flag,jdbcType=INTEGER},
+      </if>
+      <if test="record.inDate != null">
+        in_date = #{record.inDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="record.operatorType != null">
+        operator_type = #{record.operatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceNo != null">
+        province_no = #{record.provinceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeStamp != null">
+        time_stamp = #{record.timeStamp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateName != null">
+        update_name = #{record.updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvalDate != null">
+        approval_date = #{record.approvalDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvalName != null">
+        approval_name = #{record.approvalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvalNo != null">
+        approval_no = #{record.approvalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvalUserName != null">
+        approval_user_name = #{record.approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeNo != null">
+        employee_no = #{record.employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isBack != null">
+        is_back = #{record.isBack,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managerIdentityNum != null">
+        manager_identity_num = #{record.managerIdentityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managerIdentityType != null">
+        manager_identity_type = #{record.managerIdentityType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managerPhone != null">
+        manager_phone = #{record.managerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managerUserName != null">
+        manager_user_name = #{record.managerUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.markerId != null">
+        marker_id = #{record.markerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.markerName != null">
+        marker_name = #{record.markerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.markerNo != null">
+        marker_no = #{record.markerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.markerSiteNo != null">
+        marker_site_no = #{record.markerSiteNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uuid != null">
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zipCode != null">
+        zip_code = #{record.zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update lv_marker_site
+    set id = #{record.id,jdbcType=BIGINT},
+      city_no = #{record.cityNo,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      create_name = #{record.createName,jdbcType=VARCHAR},
+      data_source = #{record.dataSource,jdbcType=VARCHAR},
+      delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
+      delete_name = #{record.deleteName,jdbcType=VARCHAR},
+      district_name = #{record.districtName,jdbcType=VARCHAR},
+      district_no = #{record.districtNo,jdbcType=VARCHAR},
+      error_mes = #{record.errorMes,jdbcType=VARCHAR},
+      flag = #{record.flag,jdbcType=INTEGER},
+      in_date = #{record.inDate,jdbcType=TIMESTAMP},
+      is_deleted = #{record.isDeleted,jdbcType=CHAR},
+      operator_type = #{record.operatorType,jdbcType=VARCHAR},
+      province_no = #{record.provinceNo,jdbcType=VARCHAR},
+      time_stamp = #{record.timeStamp,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      update_name = #{record.updateName,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      approval_date = #{record.approvalDate,jdbcType=VARCHAR},
+      approval_name = #{record.approvalName,jdbcType=VARCHAR},
+      approval_no = #{record.approvalNo,jdbcType=VARCHAR},
+      approval_user_name = #{record.approvalUserName,jdbcType=VARCHAR},
+      employee_no = #{record.employeeNo,jdbcType=VARCHAR},
+      is_back = #{record.isBack,jdbcType=VARCHAR},
+      manager_identity_num = #{record.managerIdentityNum,jdbcType=VARCHAR},
+      manager_identity_type = #{record.managerIdentityType,jdbcType=VARCHAR},
+      manager_phone = #{record.managerPhone,jdbcType=VARCHAR},
+      manager_user_name = #{record.managerUserName,jdbcType=VARCHAR},
+      marker_id = #{record.markerId,jdbcType=BIGINT},
+      marker_name = #{record.markerName,jdbcType=VARCHAR},
+      marker_no = #{record.markerNo,jdbcType=VARCHAR},
+      marker_site_no = #{record.markerSiteNo,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      uuid = #{record.uuid,jdbcType=VARCHAR},
+      zip_code = #{record.zipCode,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update lv_marker_site
+    set id = #{record.id,jdbcType=BIGINT},
+      city_no = #{record.cityNo,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      create_name = #{record.createName,jdbcType=VARCHAR},
+      data_source = #{record.dataSource,jdbcType=VARCHAR},
+      delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
+      delete_name = #{record.deleteName,jdbcType=VARCHAR},
+      district_name = #{record.districtName,jdbcType=VARCHAR},
+      district_no = #{record.districtNo,jdbcType=VARCHAR},
+      error_mes = #{record.errorMes,jdbcType=VARCHAR},
+      flag = #{record.flag,jdbcType=INTEGER},
+      in_date = #{record.inDate,jdbcType=TIMESTAMP},
+      is_deleted = #{record.isDeleted,jdbcType=CHAR},
+      operator_type = #{record.operatorType,jdbcType=VARCHAR},
+      province_no = #{record.provinceNo,jdbcType=VARCHAR},
+      time_stamp = #{record.timeStamp,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      update_name = #{record.updateName,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      approval_date = #{record.approvalDate,jdbcType=VARCHAR},
+      approval_name = #{record.approvalName,jdbcType=VARCHAR},
+      approval_no = #{record.approvalNo,jdbcType=VARCHAR},
+      approval_user_name = #{record.approvalUserName,jdbcType=VARCHAR},
+      employee_no = #{record.employeeNo,jdbcType=VARCHAR},
+      is_back = #{record.isBack,jdbcType=VARCHAR},
+      manager_identity_num = #{record.managerIdentityNum,jdbcType=VARCHAR},
+      manager_identity_type = #{record.managerIdentityType,jdbcType=VARCHAR},
+      manager_phone = #{record.managerPhone,jdbcType=VARCHAR},
+      manager_user_name = #{record.managerUserName,jdbcType=VARCHAR},
+      marker_id = #{record.markerId,jdbcType=BIGINT},
+      marker_name = #{record.markerName,jdbcType=VARCHAR},
+      marker_no = #{record.markerNo,jdbcType=VARCHAR},
+      marker_site_no = #{record.markerSiteNo,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      uuid = #{record.uuid,jdbcType=VARCHAR},
+      zip_code = #{record.zipCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hensu.javapractise.model.Markersite">
+    update lv_marker_site
+    <set>
+      <if test="cityNo != null">
+        city_no = #{cityNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createName != null">
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSource != null">
+        data_source = #{dataSource,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteDate != null">
+        delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteName != null">
+        delete_name = #{deleteName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null">
+        district_name = #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtNo != null">
+        district_no = #{districtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMes != null">
+        error_mes = #{errorMes,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="inDate != null">
+        in_date = #{inDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="operatorType != null">
+        operator_type = #{operatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceNo != null">
+        province_no = #{provinceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStamp != null">
+        time_stamp = #{timeStamp,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateName != null">
+        update_name = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalDate != null">
+        approval_date = #{approvalDate,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalName != null">
+        approval_name = #{approvalName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalNo != null">
+        approval_no = #{approvalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalUserName != null">
+        approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNo != null">
+        employee_no = #{employeeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isBack != null">
+        is_back = #{isBack,jdbcType=VARCHAR},
+      </if>
+      <if test="managerIdentityNum != null">
+        manager_identity_num = #{managerIdentityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="managerIdentityType != null">
+        manager_identity_type = #{managerIdentityType,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPhone != null">
+        manager_phone = #{managerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="managerUserName != null">
+        manager_user_name = #{managerUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="markerId != null">
+        marker_id = #{markerId,jdbcType=BIGINT},
+      </if>
+      <if test="markerName != null">
+        marker_name = #{markerName,jdbcType=VARCHAR},
+      </if>
+      <if test="markerNo != null">
+        marker_no = #{markerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="markerSiteNo != null">
+        marker_site_no = #{markerSiteNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        zip_code = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hensu.javapractise.model.Markersite">
+    update lv_marker_site
+    set city_no = #{cityNo,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_name = #{createName,jdbcType=VARCHAR},
+      data_source = #{dataSource,jdbcType=VARCHAR},
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      delete_name = #{deleteName,jdbcType=VARCHAR},
+      district_name = #{districtName,jdbcType=VARCHAR},
+      district_no = #{districtNo,jdbcType=VARCHAR},
+      error_mes = #{errorMes,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      in_date = #{inDate,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      operator_type = #{operatorType,jdbcType=VARCHAR},
+      province_no = #{provinceNo,jdbcType=VARCHAR},
+      time_stamp = #{timeStamp,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      approval_date = #{approvalDate,jdbcType=VARCHAR},
+      approval_name = #{approvalName,jdbcType=VARCHAR},
+      approval_no = #{approvalNo,jdbcType=VARCHAR},
+      approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      employee_no = #{employeeNo,jdbcType=VARCHAR},
+      is_back = #{isBack,jdbcType=VARCHAR},
+      manager_identity_num = #{managerIdentityNum,jdbcType=VARCHAR},
+      manager_identity_type = #{managerIdentityType,jdbcType=VARCHAR},
+      manager_phone = #{managerPhone,jdbcType=VARCHAR},
+      manager_user_name = #{managerUserName,jdbcType=VARCHAR},
+      marker_id = #{markerId,jdbcType=BIGINT},
+      marker_name = #{markerName,jdbcType=VARCHAR},
+      marker_no = #{markerNo,jdbcType=VARCHAR},
+      marker_site_no = #{markerSiteNo,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hensu.javapractise.model.Markersite">
+    update lv_marker_site
+    set city_no = #{cityNo,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_name = #{createName,jdbcType=VARCHAR},
+      data_source = #{dataSource,jdbcType=VARCHAR},
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      delete_name = #{deleteName,jdbcType=VARCHAR},
+      district_name = #{districtName,jdbcType=VARCHAR},
+      district_no = #{districtNo,jdbcType=VARCHAR},
+      error_mes = #{errorMes,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      in_date = #{inDate,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      operator_type = #{operatorType,jdbcType=VARCHAR},
+      province_no = #{provinceNo,jdbcType=VARCHAR},
+      time_stamp = #{timeStamp,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      approval_date = #{approvalDate,jdbcType=VARCHAR},
+      approval_name = #{approvalName,jdbcType=VARCHAR},
+      approval_no = #{approvalNo,jdbcType=VARCHAR},
+      approval_user_name = #{approvalUserName,jdbcType=VARCHAR},
+      employee_no = #{employeeNo,jdbcType=VARCHAR},
+      is_back = #{isBack,jdbcType=VARCHAR},
+      manager_identity_num = #{managerIdentityNum,jdbcType=VARCHAR},
+      manager_identity_type = #{managerIdentityType,jdbcType=VARCHAR},
+      manager_phone = #{managerPhone,jdbcType=VARCHAR},
+      manager_user_name = #{managerUserName,jdbcType=VARCHAR},
+      marker_id = #{markerId,jdbcType=BIGINT},
+      marker_name = #{markerName,jdbcType=VARCHAR},
+      marker_no = #{markerNo,jdbcType=VARCHAR},
+      marker_site_no = #{markerSiteNo,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
