@@ -58,6 +58,7 @@ public class HelloController {
         Map<String ,Object> tr = new HashMap<>();
         tr.put("tr",n);
         list.add(tr);
+        int e = 1/0;
         return JSON.toJSONString(list);
     }
 
