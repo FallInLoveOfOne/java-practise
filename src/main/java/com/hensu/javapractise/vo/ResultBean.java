@@ -19,4 +19,10 @@ public class ResultBean {
         this.msg=msg;
         this.data=data;
     }
+    public ResultBean(CodeMsg codeMsg,Object data){
+        this.code = codeMsg.getCode();
+        this.msg=codeMsg.getMsg();
+        this.data=data;
+
+    }
 }

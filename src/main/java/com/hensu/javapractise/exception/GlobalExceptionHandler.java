@@ -1,6 +1,7 @@
 package com.hensu.javapractise.exception;
 
 import com.alibaba.fastjson.JSON;
+import com.hensu.javapractise.vo.CodeMsg;
 import com.hensu.javapractise.vo.ResultBean;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -16,7 +17,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public String exceptionHandler(Exception ex){
-        ResultBean resultBean = new ResultBean(-1,"EX",ex.getMessage());
+        ResultBean resultBean = new ResultBean(CodeMsg.EX,ex.getMessage());
         return JSON.toJSONString(resultBean);
     }
 }
