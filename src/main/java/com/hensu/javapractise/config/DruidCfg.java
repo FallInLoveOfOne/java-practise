@@ -3,11 +3,15 @@ package com.hensu.javapractise.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
@@ -29,6 +33,20 @@ public class DruidCfg {
     @Bean
     public DataSource createDataSource(){
         return new DruidDataSource();
+    }
+
+    /*
+    @Bean
+    @Autowired
+    public PlatformTransactionManager createTx(DataSource dataSource){
+        return new DataSourceTransactionManager(dataSource);
+    }
+    */
+
+    @Bean
+    @Autowired
+    public JdbcTemplate createJdbcTemplate(DataSource dataSource){
+        return new JdbcTemplate(dataSource);
     }
 
     //配置Druid的监控

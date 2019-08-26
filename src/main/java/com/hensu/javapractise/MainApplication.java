@@ -1,5 +1,6 @@
 package com.hensu.javapractise;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication//(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class, MybatisAutoConfiguration.class})// 取消启动默认连接数据库
 @EnableTransactionManagement
+@MapperScan({"com.hensu.javapractise.dao"})
 public class MainApplication {
 
     public static void main(String[] args) {
