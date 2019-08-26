@@ -54,7 +54,7 @@ public class HelloController {
     @GetMapping("/allSite")
     public String getAllSites(){
         List<Map<String,Object>> list = jdbcTemplate.queryForList("SELECT * FROM lv_marker_site");
-        int n = holoService.deleteSiteById(6002L);
+        int n = holoService.deleteSiteById(6006L);
         Map<String ,Object> tr = new HashMap<>();
         tr.put("tr",n);
         list.add(tr);

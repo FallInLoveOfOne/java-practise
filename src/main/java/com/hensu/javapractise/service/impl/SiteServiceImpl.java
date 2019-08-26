@@ -4,6 +4,7 @@ import com.hensu.javapractise.dao.MarkersiteMapper;
 import com.hensu.javapractise.service.SiteService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 
@@ -26,12 +27,13 @@ public class SiteServiceImpl implements SiteService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public int deleteById(Long id) {
-//        try {
+        try {
             dao.deleteByPrimaryKey(id);
             int n = 2/0;
             return 1;
-//        }catch (Exception e){
-//            return 0;
-//        }
+        }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();// 异常被捕捉到无比手动回滚事务
+            return 0;
+        }
     }
 }

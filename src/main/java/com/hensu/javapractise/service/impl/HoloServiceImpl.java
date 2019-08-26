@@ -21,12 +21,12 @@ public class HoloServiceImpl implements HoloService {
     @Transactional
     @Override
     public int deleteSiteById(Long id) {
-        try {
+//        try {
             jdbcTemplate.execute("delete from lv_marker_site WHERE id="+id);
             int x=2/0;
             return 1;
-        }catch (Exception e){
-            return 0;
-        }
+//        }catch (Exception e){
+//            return 0;
+//        }
     }
 }
