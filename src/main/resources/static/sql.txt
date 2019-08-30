@@ -1,0 +1,52 @@
+@Select("select *from User where id=#{id} and userName like #{name}")
+public User retrieveUserByIdAndName(@Param("id")int id,@Param("name")String names);
+
+@Insert("INSERT INTO user(userName,userAge,userAddress) VALUES(#{userName},#{userAge},#{userAddress})")
+public void addNewUser(User user);
+
+@Insert("insert into table3 (id, name) values(#{nameId}, #{name})")
+@SelectKey(statement="call next value for TestSequence", keyProperty="nameId", before=true, resultType=int.class)
+int insertTable3(Name name);
+@Results(id = "userResult", value = {
+  @Result(property = "id", column = "uid", id = true),
+  @Result(property = "firstName", column = "first_name"),
+  @Result(property = "lastName", column = "last_name")
+})
+@TypeDiscriminator(column = "type",
+   cases={
+       @Case(value="1",type=RegisterEmployee.class,results={
+          @Result(property="salay")
+       }),
+       @Case(value="2",type=TimeEmployee.class,results={
+          @Result(property="time")
+       })
+   }
+)
+@Select("select * from users where id = #{id}")
+User getUserById(Integer id);
+
+@Results(id = "companyResults")
+@ConstructorArgs({
+  @Arg(property = "id", column = "cid", id = true),
+  @Arg(property = "name", column = "name")
+})
+@Select("select * from company where id = #{id}")
+Company getCompanyById(Integer id);
+
+@ResultMap(id = "xmlUserResults")
+@SelectProvider(type = UserSqlBuilder.class, method = "buildGetUsersByName")
+List<User> getUsersByName(String name);
+
+// 注：建议尽可能避免使用SqlBuild的模式生成的,如果因为功能需要必须动态生成SQL的话，也是直接写SQL拼接返回，而不是一堆类似SELECT()、FROM()的函数调用，这只会让维护成为噩梦，这思路的设计者不是知道怎么想的, 此处仅用于演示XXXProvider功能，但是XXXProvider模式本身的设计在关键时候还是比较清晰的。
+class UserSqlBuilder {
+  public String buildGetUsersByName(final String name) {
+    return new SQL(){{
+      SELECT("*");
+      FROM("users");
+      if (name != null) {
+        WHERE("name like #{value} || '%'");
+      }
+      ORDER_BY("id");
+    }}.toString();
+  }
+}
