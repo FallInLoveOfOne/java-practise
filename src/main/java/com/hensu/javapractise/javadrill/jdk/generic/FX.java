@@ -1,4 +1,4 @@
-package com.hensu.javapractise.javadrill.jdk;
+package com.hensu.javapractise.javadrill.jdk.generic;
 
 import java.util.ArrayList;
 import java.util.List;
