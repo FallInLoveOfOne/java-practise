@@ -12,6 +12,12 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
+ * Java NIO三个核心对象中的Buffer和Channel，
+ * 现在我们就重点介绍一下第三个核心对象Selector。Selector是一个对象，
+ * 它可以注册到很多个Channel上，监听各个Channel上发生的事件，
+ * 并且能够根据事件情况决定Channel读写。
+ * 这样，通过一个线程管理多个Channel，就可以处理大量网络连接了
+ * 在这里，只要知道使用Selector能够处理多个通道就足够了
  * @Author: sh
  * @Description: MultiPortEcho
  * @Date: 18:01 2019/9/3
