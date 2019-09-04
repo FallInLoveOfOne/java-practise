@@ -13,5 +13,8 @@ public class C extends A {
         String aPublic_ = this.public_;// public
         //String aDefault = this.default_;// default 不同包下不能访问，与是否子类无关
         String aProtected = this.protected_;// protected;
+        C c = new C();
+        String cPro = c.protected_;
+        String cp = c.public_;
     }
 }
