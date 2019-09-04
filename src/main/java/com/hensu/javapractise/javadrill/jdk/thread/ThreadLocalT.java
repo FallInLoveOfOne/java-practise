@@ -16,6 +16,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 而ThreadLocal则从另一个角度来解决多线程的并发访问。ThreadLocal会为每一个线程提供一个独立的变量副本，
  * 从而隔离了多个线程对数据的访问冲突
  *
+ * 为每个线程创建一个ThreadLocalMap实例,K为ThreadLocal实例,V为ThreadLocal实例包裹的对象值
+ * ThreadLocalMap是ThreadLocal的一个静态内部类，每个Thread都有一个ThreadLocalMap属性
  * @Author: sh
  * @Description: ThreadLocalT
  * @Date: 9:33 2019/9/4
@@ -43,7 +45,7 @@ public class ThreadLocalT {
 
     static volatile AtomicInteger n = new AtomicInteger(-1);
 
-    static ThreadLocal<DateFormat> sdf;// 
+    static ThreadLocal<DateFormat> sdf;//
 
     static {
         sdf = new ThreadLocal<DateFormat>() {
