@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+    <!--以下为属性顺序-->
     <!--<properties></properties>-->
 
     <settings>
