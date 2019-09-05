@@ -37,17 +37,22 @@ public class HttpClientApache {
      * apache httpclient get
      * @return
      */
-    public static String getReq() {
+    public static String getReq(String getUrl) {
         HttpResponse httpResponse = null;
         HttpGet httpGet = null;
         try {
-            httpGet = new HttpGet("http://212.64.49.50:8081/wechat/orders/20190820160833980874e61d8c0b74c8");
+            httpGet = new HttpGet(getUrl/*"https://www.baidu.com"*/);
             httpResponse = closeableHttpClient.execute(httpGet);
-            InputStream con = httpResponse.getEntity().getContent();
-            Scanner scanner = new Scanner(con);
-            System.out.println(httpResponse.getStatusLine());
-            while (scanner.hasNext()) {
-                System.out.println(scanner.nextLine());
+            HttpEntity httpEntity = httpResponse.getEntity();
+            String result = null;
+            if (httpEntity != null) {
+                try {
+                    result = EntityUtils.toString(httpEntity);
+                    log.info("getReq()请求结果==="+result);
+                    return result;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             return null;
         } catch (IOException e) {
@@ -56,7 +61,7 @@ public class HttpClientApache {
             try {
                 ((CloseableHttpResponse) httpResponse).close();
                 httpGet.releaseConnection();
-                closeableHttpClient.close();
+//                closeableHttpClient.close();
 
             } catch (Exception e) {
 
@@ -119,8 +124,8 @@ public class HttpClientApache {
 
             if (closeableHttpClient != null) {
                 try {
-                    closeableHttpClient.close();
-                } catch (IOException e) {
+//                    closeableHttpClient.close();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -184,22 +189,25 @@ public class HttpClientApache {
     }
 
     public static void main(String[] args) {
-//        getReq();
         String json = "bbh/s/Rpp4AJfg+VcW+KoNyFWZPkHv5E0BWwmvfbcNT5wvkVIrMStCGI8JEdqKkKgz7kT6w2cq7VXEq3kxTLhs/iiax+Nz9A8OkK927NJAFXu7KGcFJXmUGtfYIW1ZWSkAjd7zrln50k6biHgRGhs2LElD9DhiFF30ODhYV4ei9WdZFGVPEgINN7wPTZ44h7ut/dGOUnnQYODVixQefN+HpQkrsTILKZssoZX2JKhhzKrAJgXC4LZJt1M9fTpwIv";
         String postUrl = "http://212.64.49.50:8081/hnseal/loginInfo";
-//        String result = postReq(postUrl, json);
-//        System.out.println(result);
-//        System.out.println(jdkPostSend(postUrl,json));
         /**
-         * 服务端接口如下
+         * 服务端接口定义如下
+         * @PostMapping(value = "/loginInfo", produces = "application/json;charset=UTF-8")
+         * public String loginInfo(@RequestBody String json)
+         */
+        String result = postReq(postUrl, json);
+        System.out.println(result);
+        System.out.println(jdkPostSend(postUrl,json));
+        /**
+         * 服务端接口定义如下
          * @PostMapping(value = "/clientOrderSealInfo",produces= "application/json;charset=UTF-8")
          * public String clientOrderSealInfo(@RequestBody String markerSiteNo,HttpServletRequest request)
          */
         System.out.println(jdkPostSend("http://212.64.49.50:8081/stamp/clientOrderSealInfo","4301031000011001"));
         System.out.println(postReq("http://212.64.49.50:8081/stamp/clientOrderSealInfo","4301031000011001"));
-//        System.out.println(jdkPostSend("http://212.64.49.50:8081/stamp/getExpansionInfo","4301031000011001"));
         /**
-         * 服务端接口如下
+         * 服务端接口定义如下
          * @PostMapping(value = "/smsSend",produces= "application/json;charset=UTF-8")
          * public String clientSendSms(@RequestBody SmsMsgSendVO smsMsgSendVO)
          */
@@ -212,5 +220,6 @@ public class HttpClientApache {
         String smsJson = JSONObject.toJSONString(smsMsgSendVO);
         System.out.println(jdkPostSend("http://212.64.49.50:8081/stamp/smsSend",smsJson));
         System.out.println(postReq("http://212.64.49.50:8081/stamp/smsSend",smsJson));
+        System.out.println(getReq("https://www.baidu.com"));
     }
 }
