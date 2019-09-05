@@ -29,7 +29,7 @@ public class MyProxy {
         }
 
         /**
-         * proxy为动态生成的代理对象
+         * proxy为JVM动态生成的代理对象
          * @param proxy
          * @param method
          * @param args
