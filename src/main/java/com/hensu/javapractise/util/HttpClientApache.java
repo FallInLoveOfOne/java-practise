@@ -189,6 +189,28 @@ public class HttpClientApache {
         String postUrl = "http://212.64.49.50:8081/hnseal/loginInfo";
 //        String result = postReq(postUrl, json);
 //        System.out.println(result);
-        System.out.println(jdkPostSend(postUrl,json));
+//        System.out.println(jdkPostSend(postUrl,json));
+        /**
+         * 服务端接口如下
+         * @PostMapping(value = "/clientOrderSealInfo",produces= "application/json;charset=UTF-8")
+         * public String clientOrderSealInfo(@RequestBody String markerSiteNo,HttpServletRequest request)
+         */
+        System.out.println(jdkPostSend("http://212.64.49.50:8081/stamp/clientOrderSealInfo","4301031000011001"));
+        System.out.println(postReq("http://212.64.49.50:8081/stamp/clientOrderSealInfo","4301031000011001"));
+//        System.out.println(jdkPostSend("http://212.64.49.50:8081/stamp/getExpansionInfo","4301031000011001"));
+        /**
+         * 服务端接口如下
+         * @PostMapping(value = "/smsSend",produces= "application/json;charset=UTF-8")
+         * public String clientSendSms(@RequestBody SmsMsgSendVO smsMsgSendVO)
+         */
+        SmsMsgSendVO smsMsgSendVO = new SmsMsgSendVO();
+        smsMsgSendVO.setSiteNo("11s");
+        smsMsgSendVO.setCropNo("11c");
+        smsMsgSendVO.setPhone("18767090630");
+        smsMsgSendVO.setMsgContent("hello");
+        smsMsgSendVO.setSealStatus("2");
+        String smsJson = JSONObject.toJSONString(smsMsgSendVO);
+        System.out.println(jdkPostSend("http://212.64.49.50:8081/stamp/smsSend",smsJson));
+        System.out.println(postReq("http://212.64.49.50:8081/stamp/smsSend",smsJson));
     }
 }
