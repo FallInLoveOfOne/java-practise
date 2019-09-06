@@ -1,5 +1,6 @@
 package com.hensu.javapractise.util;
 
+import lombok.extern.log4j.Log4j2;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -10,6 +11,7 @@ import java.io.*;
  * @Description: ImgUtil
  * @Date: 9:14 2019/7/1
  */
+@Log4j2
 public class ImgUtil {
 
 

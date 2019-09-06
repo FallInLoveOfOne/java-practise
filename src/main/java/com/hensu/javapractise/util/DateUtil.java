@@ -1,5 +1,6 @@
 package com.hensu.javapractise.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
@@ -15,6 +16,7 @@ import java.util.UUID;
  * @Description: DateUtil
  * @Date: 23:52 2019/7/18
  */
+@Slf4j
 public class DateUtil {
 
     public static Long getMilliSecond() {
