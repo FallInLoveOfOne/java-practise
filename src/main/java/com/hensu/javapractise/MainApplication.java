@@ -39,13 +39,21 @@ public class MainApplication {
         SpringApplication.run(MainApplication.class, args);
     }
 
+    /**
+     * 此Bean与com.hensu.javapractise.redis.RedisPoolFactory初始化类似
+     * @return
+     */
     @Bean(name = "shMainJedisPool")
     public JedisPool createJedisPool(){
-        // GenericObjectPoolConfig poolConfig, String host, int port, int timeout, String password
         JedisPool pool = new JedisPool(new JedisPoolConfig(), redisHost,redisPort,timeOut*1000,redisPass,0);//创建Redis连接池
         return pool;
     }
 
+    /**
+     * prototype:每次都产生新的实例
+     * @param shMainJedisPool
+     * @return
+     */
     @Bean(name = "shMainJedis")
     @Scope("prototype")
     public Jedis createJedis(@Autowired JedisPool shMainJedisPool){
