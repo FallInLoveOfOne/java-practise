@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import redis.clients.jedis.Jedis;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -42,6 +43,9 @@ public class HelloController {
 
     @Resource
     MQSender mqSender;
+
+    @Resource
+    Jedis shMainJedis;
 
     @GetMapping(value = "/index", produces = {"application/json;charset=UTF-8"})
     public String hello() {
@@ -84,5 +88,11 @@ public class HelloController {
     @GetMapping(value = "/sendmq/{msg}", produces = {"application/json;charset=UTF-8"})
     public void sendmq(@PathVariable String msg) {
         mqSender.send(msg);
+    }
+
+    @GetMapping("/getRedis")
+    public String getRedis(){
+        String val = shMainJedis.get("haha");
+        return val;
     }
 }
