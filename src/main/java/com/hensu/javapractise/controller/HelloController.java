@@ -6,6 +6,7 @@ import com.hensu.javapractise.rabbitmq.MQSender;
 import com.hensu.javapractise.redis.RedisService;
 import com.hensu.javapractise.service.HoloService;
 import com.hensu.javapractise.service.SiteService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/hello")
+@Slf4j
 public class HelloController {
 
     @Resource
@@ -63,6 +65,7 @@ public class HelloController {
     @GetMapping("/allSite")
     public String getAllSites() {
         List<Map<String, Object>> list = jdbcTemplate.queryForList("SELECT * FROM lv_marker_site");
+        log.info(JSON.toJSONString(list));
         int n = holoService.deleteSiteById(6006L);
         Map<String, Object> tr = new HashMap<>();
         tr.put("tr", n);
