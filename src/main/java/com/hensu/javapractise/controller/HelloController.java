@@ -58,7 +58,7 @@ public class HelloController {
         String hello = null;
         boolean is = StringUtils.isEmpty(hello);
         seal.setNo("2010" + (is ? "-true" : "-false"));
-        seal.setName("redis-" + redisService.get("haha"));
+        seal.setName("redis：" + redisService.get("haha"));
         return JSON.toJSONString(seal);
     }
 
