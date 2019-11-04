@@ -22,10 +22,12 @@ public class MQSender {
 //		amqpTemplate.convertAndSend(MQConfig.MIAOSHA_QUEUE, msg);
 //	}
 	
-	public void send(Object message) {
+	public String send(Object message) {
 		String msg = RedisService.beanToString(message);
 		log.info("send message:"+msg);
-		amqpTemplate.convertAndSend(MQConfig.QUEUE, msg);
+//		amqpTemplate.convertAndSend(MQConfig.QUEUE, msg);
+		return amqpTemplate.convertSendAndReceive(MQConfig.QUEUE,message).toString();
+
 	}
 
 	public void sendTopic(Object message) {

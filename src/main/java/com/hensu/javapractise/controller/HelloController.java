@@ -90,7 +90,8 @@ public class HelloController {
      */
     @GetMapping(value = "/sendmq/{msg}", produces = {"application/json;charset=UTF-8"})
     public void sendmq(@PathVariable String msg) {
-        mqSender.send(msg);
+        String rs = mqSender.send(msg);
+        System.out.println("消费返回结果："+rs);
     }
 
     @GetMapping("/getRedis")
